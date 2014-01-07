@@ -1315,7 +1315,7 @@ var TAFFY, exports, T;
 
             }
             else if ( T.isObject( v ) && settings.forcePropertyCase ){
-              o = {};
+              o = (typeof v == 'object') ? Object.create(Object.getPrototypeOf(v)) : {};
 
               eachin( v, function ( av, ai ) {
                 o[(settings.forcePropertyCase === 'lower') ? ai.toLowerCase()
@@ -1757,7 +1757,7 @@ var TAFFY, exports, T;
     // *
     // ****************************************   
     TAFFY.mergeObj = function ( ob1, ob2 ) {
-      var c = {};
+      var c = Object.create(Object.getPrototypeOf(ob1));
       eachin( ob1, function ( v, n ) { c[n] = ob1[n]; });
       eachin( ob2, function ( v, n ) { c[n] = ob2[n]; });
       return c;
